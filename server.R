@@ -43,9 +43,9 @@ function(input, output, session) {
   
   # テンプレートのExcelファイルを保存する
   output$downloadData <- downloadHandler(
-    filename = "テンプレートExcelファイル.xlsx",
+    filename = "テンプレートExcelファイル（3剤3期）.xlsx",
     content = function(file){
-      file.copy(file.path("./", "example_excel_file.xlsx"), file)
+      file.copy(file.path("./", "example_excel_file_3x3.xlsx"), file)
     }
   )
   
