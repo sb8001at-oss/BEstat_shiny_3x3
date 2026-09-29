@@ -76,8 +76,13 @@ ncm_self <- function(conc, time){
   tmax <- time[which(conc == Cmax)]
   index_tmax <- which(conc == Cmax)
   
-  conc_omitZero <- c(0, conc[conc > 0])
-  time_omitZero <- c(0, time[conc > 0])
+  if(conc[1] == 0){
+    conc_omitZero <- c(0, conc[conc > 0])
+    time_omitZero <- c(0, time[conc > 0])
+  } else {
+    conc_omitZero <- conc[conc > 0]
+    time_omitZero <- time[conc > 0]
+  }
   
   AUC <- 
     (head(conc_omitZero + conc_omitZero[-1], -1) *
@@ -627,7 +632,7 @@ out_excel <- function(pk, time, pkparam, n_sbj = 15){
   tmp4 <- tempfile(fileext = ".png")
   
   ggsave(filename = tmp, plot = pk_plot_ms, width = 8, height = 6, dpi = 300)
-  ggsave(filename = tmp2, plot = pk_plot_each, width = 10, height = nrow(pk)/2, dpi = 300)
+  ggsave(filename = tmp2, plot = pk_plot_each, width = 16, height = nrow(pk)/2, dpi = 300)
   ggsave(filename = tmp3, plot = p_pkparam_boxplot, width = 8, height = 8, dpi = 300)
   ggsave(filename = tmp4, plot = p_pkparam_jitter, width = 8, height = 8, dpi = 300)
   
@@ -667,7 +672,7 @@ out_excel <- function(pk, time, pkparam, n_sbj = 15){
     add_worksheet("血漿中薬物濃度グラフ（平均値）")$
     add_image("血漿中薬物濃度グラフ（平均値）", file = tmp, dims = "A1", width = 8, height = 6)$
     add_worksheet("血漿中薬物濃度グラフ（個々の被験者）")$
-    add_image("血漿中薬物濃度グラフ（個々の被験者）", file = tmp2, dims = "A1", width = 10, height = nrow(pk)/2)$
+    add_image("血漿中薬物濃度グラフ（個々の被験者）", file = tmp2, dims = "A1", width = 16, height = nrow(pk)/2)$
     add_worksheet("分散分析結果")$
     add_data("分散分析結果", "AUC", start_row = 1)$
     add_data_table("分散分析結果", mmrm_result[[1]][[1]] |> conv_lme_df(), start_row = 2)$
