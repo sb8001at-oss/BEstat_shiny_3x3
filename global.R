@@ -367,7 +367,7 @@ conv_lme_rand_df <- function(lme_obj){
 
 # 信頼区間をデータフレームにする関数
 conv_ci_df <- function(ci_obj){
-  temp <- cbind(label = c("上側90%", "中央値", "下側90%"), ci_obj |> t()|> round(4) |> as.data.frame())
+  temp <- cbind(label = c("下側90%", "中央値", "上側90%"), ci_obj |> t()|> round(4) |> as.data.frame())
   colnames(temp) <- c("", "試験製剤1", "試験製剤2")
   temp
 }
