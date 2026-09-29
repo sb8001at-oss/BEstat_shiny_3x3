@@ -30,8 +30,8 @@ function(input, output, session) {
         return(0)
       }
       
-      if(pk_read$treatment |> unique() %in% c("試験製剤", "標準製剤") |> sum() != 2){
-        showNotification("製剤は2つとし，「試験製剤」，「標準製剤」の名前で設定して下さい。", duration = 5, type = "error")
+      if(pk_read$treatment |> unique() %in% c("試験製剤1", "試験製剤2", "標準製剤") |> sum() != 3){
+        showNotification("製剤は3つとし，「試験製剤1」，「試験製剤2」，「標準製剤」の名前で設定して下さい。", duration = 5, type = "error")
         return(0)
       }
       
